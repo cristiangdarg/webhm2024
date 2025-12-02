@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Materias - Mobile</title>
+    <style>
+        body {
+            font-family: system-ui,Arial;
+            margin: 0;
+            background: #eef3ff
+        }
+
+        .header {
+            background: #0b5fff;
+            color: #fff;
+            padding: 14px;
+            text-align: center;
+            font-weight: 700
+        }
+
+        .list {
+            padding: 12px
+        }
+
+        .item {
+            background: #fff;
+            margin-bottom: 12px;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(2,6,23,0.06)
+        }
+
+            .item h3 {
+                margin: 0 0 6px;
+                font-size: 16px
+            }
+
+            .item .meta {
+                font-size: 13px;
+                color: #444;
+                margin-bottom: 8px
+            }
+
+            .item .actions a {
+                display: inline-block;
+                margin-right: 8px;
+                padding: 8px 10px;
+                border-radius: 8px;
+                border: 1px solid #0b5fff;
+                color: #0b5fff;
+                text-decoration: none
+            }
+
+        .img-thumb {
+            width: 48px;
+            height: 36px;
+            object-fit: contain;
+            margin-right: 8px;
+            vertical-align: middle
+        }
+
+        .row {
+            display: flex;
+            align-items: center
+        }
+        /* BUSCADOR */
+        .search-container {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <div class="header">Materias 2024 - Héroes de Malvinas</div>
+
+   
+    <div class="list" id="list"></div>
+
+
+
+    <script>
+        const materias = [
+            /* INICIO - MATERIAS */
+            {
+                "Id": 1,
+                "Materia": "Matemáticas",
+                "Docente": "Jimenez Talina",
+                "IdAnio": 1,
+                "IdCurso": 1,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/1Anio/Matematica/PlanificacionDeMatematica1Año2024.pdf",
+                "Programa": "./documentos/2024/1Anio/Matematica/PROGRAMA.pdf",
+                "Documentacion": "./documentos/2024/1Anio/Matematica/CartillaDeMatematica1Año2024.pdf",
+                "imagen": "./documentos/img/Matematica.png"
+            },
+            {
+                "Id": 2,
+                "Materia": "Matemáticas",
+                "Docente": "Oscar Beltran",
+                "IdAnio": 1,
+                "IdCurso": 2,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/2Anio/Matematica/PalnificacionAnual2AñoHéroes-2024.pdf",
+                "Programa": "./documentos/2024/2Anio/Matematica/PROGRAMA2DOHEROES-2024.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Matematica.png"
+            },
+            {
+                "Id": 3,
+                "Materia": "Matemáticas",
+                "Docente": "Roxana Paola Carrillo",
+                "IdAnio": 1,
+                "IdCurso": 3,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/3Anio/Matematica/planificacion3romatheroes2024.pdf",
+                "Programa": "./documentos/2024/3Anio/Matematica/programa3roheroes2024.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Matematica.png"
+            },
+            {
+                "Id": 4,
+                "Materia": "Matemáticas",
+                "Docente": "Roxana Paola Carrillo",
+                "IdAnio": 1,
+                "IdCurso": 4,
+                "DescripcionAnio": "2024",
+                "Planificacion": "",
+                "Programa": "./documentos/2024/4Anio/Matematica/Programadematemáticade4toaño.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Matematica.png"
+            },
+            {
+                "Id": 5,
+                "Materia": "Matemáticas",
+                "Docente": "Marcela Farutt",
+                "IdAnio": 1,
+                "IdCurso": 5,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/5Anio/Matematica/PlanificaciónEDI-2024.pdf",
+                "Programa": "./documentos/2024/5Anio/Matematica/PlanificaciónEDI-2024.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Matematica.png"
+            },
+            {
+                "Id": 6,
+                "Materia": "Psicologia",
+                "Docente": "Franco Gustavo Leiva",
+                "IdAnio": 1,
+                "IdCurso": 3,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/3Anio/Psicologia/2024-ColegioHeroesDeMalvinas-PlanificacionAnual-3ro-Psicologia.pdf",
+                "Programa": "./documentos/2024/3Anio/Psicologia/2024-ColegioHeroesDeMalvinas-ProgramaAnual-3ro-Psicologia.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Psicologia.png"
+            },
+            {
+                "Id": 7,
+                "Materia": "Biologia",
+                "Docente": "Silvana Torres",
+                "IdAnio": 1,
+                "IdCurso": 1,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/1Anio/Biologia/PLANIFICACIONBIOLOGIA2024HEROES.pdf",
+                "Programa": "./documentos/2024/1Anio/Biologia/PLANIFICACIONBIOLOGIA2024HEROES.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Biologia.png"
+            },
+            {
+                "Id": 8,
+                "Materia": "Biologia II (A y C)",
+                "Docente": "Suárez, Flavia Carolina",
+                "IdAnio": 1,
+                "IdCurso": 3,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/3Anio/Biologia/Prog.yPlanificacionAnual-BiologiaII-Col.HeroesdeMalvinas.pdf",
+                "Programa": "./documentos/2024/3Anio/Biologia/Prog.yPlanificacionAnual-BiologiaII-Col.HeroesdeMalvinas.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Biologia.png"
+            },
+            {
+                "Id": 9,
+                "Materia": "TIC",
+                "Docente": "Coronel, Lázaro Ezequiel",
+                "IdAnio": 1,
+                "IdCurso": 4,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/4Anio/TIC/PLANIFICACION2024-TIC-HEROES.pdf",
+                "Programa": "./documentos/2024/4Anio/TIC/unidades.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/TIC.png"
+            },
+            {
+                "Id": 10,
+                "Materia": "Ingles",
+                "Docente": "Romano, Edit",
+                "IdAnio": 1,
+                "IdCurso": 2,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/2Anio/Ingles/Planificacionanual2doañoINGLÉS2024-1.pdf",
+                "Programa": "./documentos/2024/2Anio/Ingles/ProgramaINGLÉS2doañoHEROES2024.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/ingles.png"
+            },
+            {
+                "Id": 11,
+                "Materia": "Ingles",
+                "Docente": "Maria Julia Barraza",
+                "IdAnio": 1,
+                "IdCurso": 4,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/4Anio/Ingles/PlanificacionanualCol.HeroesdeMalvinas4tos.pdf",
+                "Programa": "",
+                "Documentacion": "",
+                "imagen": "./documentos/img/ingles.png"
+            },
+            {
+                "Id": 12,
+                "Materia": "Ingles",
+                "Docente": "Maru Gambarte",
+                "IdAnio": 1,
+                "IdCurso": 5,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/5Anio/Ingles/CSHDMPlanificacionAnual2024.pdf",
+                "Programa": "./documentos/2024/5Anio/Ingles/CSHDMPrograma2024.pdf",
+                "Documentacion": "./documentos/2024/5Anio/Ingles/CSHDMBooklet5tos2024.pdf",
+                "imagen": "./documentos/img/ingles.png"
+            },
+            {
+                "Id": 13,
+                "Materia": "Lengua y Literatura",
+                "Docente": "Graciela Morales",
+                "IdAnio": 1,
+                "IdCurso": 1,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/1Anio/LenguayLiteratura/PLANIFICACIÓNANUAL-PrimerAño-HéroesdeMalvinas_031044.pdf",
+                "Programa": "./documentos/2024/1Anio/LenguayLiteratura/PLANIFICACIÓNANUAL-PrimerAño-HéroesdeMalvinas_031044.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/LenguayLiteratura.png"
+            },
+            {
+                "Id": 14,
+                "Materia": "Lengua y Literatura",
+                "Docente": "Graciela Morales",
+                "IdAnio": 1,
+                "IdCurso": 2,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/2Anio/LenguayLiteratura/Plan2doHDM2024.pdf",
+                "Programa": "./documentos/2024/2Anio/LenguayLiteratura/Plan2doHDM2024.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/LenguayLiteratura.png"
+            },
+            {
+                "Id": 15,
+                "Materia": "Lengua y Literatura",
+                "Docente": "Graciela Morales",
+                "IdAnio": 1,
+                "IdCurso": 3,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/3Anio/LenguayLiteratura/PlanificacionTercerAño-HéroesdeMalvinas_030125.pdf",
+                "Programa": "./documentos/2024/3Anio/LenguayLiteratura/PlanificacionTercerAño-HéroesdeMalvinas_030125.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/LenguayLiteratura.png"
+            },
+            {
+                "Id": 16,
+                "Materia": "Lengua y Literatura",
+                "Docente": "Graciela Morales",
+                "IdAnio": 1,
+                "IdCurso": 4,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/4Anio/LenguayLiteratura/PROGRAMAYPLANIFICACIÓNDE4°AÑO-LENGUAYLITERATURA_082155.pdf",
+                "Programa": "./documentos/2024/4Anio/LenguayLiteratura/PROGRAMAYPLANIFICACIÓNDE4°AÑO-LENGUAYLITERATURA_082155.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/LenguayLiteratura.png"
+            },
+            {
+                "Id": 17,
+                "Materia": "Lengua y Literatura",
+                "Docente": "Graciela Morales",
+                "IdAnio": 1,
+                "IdCurso": 5,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/5Anio/LenguayLiteratura/PROGRAMAYPLANIFICACIÓN5año.pdf",
+                "Programa": "./documentos/2024/5Anio/LenguayLiteratura/PROGRAMAYPLANIFICACIÓN5año.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/LenguayLiteratura.png"
+            },
+            {
+                "Id": 18,
+                "Materia": "Fisica II",
+                "Docente": "Mariela Chavez",
+                "IdAnio": 1,
+                "IdCurso": 5,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/5Anio/Fisica/PLANIFICACIÓNANUALFISICAII2024.pdf",
+                "Programa": "",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Fisica.png"
+            },
+            {
+                "Id": 19,
+                "Materia": "Educación Artística",
+                "Docente": "Valeria Salvatierra",
+                "IdAnio": 1,
+                "IdCurso": 2,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/2Anio/Artistica/PLANIFICACIONANUAL2024.pdf",
+                "Programa": "",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Artistica.png"
+            },
+            {
+                "Id": 20,
+                "Materia": "Acciones de Prevención y Promoción de la Salud",
+                "Docente": "Tania Carrizo",
+                "IdAnio": 1,
+                "IdCurso": 4,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/4Anio/AccionesdePrevenciónyPromocióndelaSalud/planificacion2024.pdf",
+                "Programa": "./documentos/2024/4Anio/AccionesdePrevenciónyPromocióndelaSalud/Programa2024HM.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/AccionesdePrevenciónyPromocióndelaSalud.png"
+            },
+            {
+                "Id": 21,
+                "Materia": "Quimica II",
+                "Docente": "Amor Gerez",
+                "IdAnio": 1,
+                "IdCurso": 3,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/3Anio/QuimicaII/PLANIFICACIONquimica2024.pdf",
+                "Programa": "./documentos/2024/3Anio/QuimicaII/PROGRAMAquimica2024.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/QuimicaII.png"
+            },
+            {
+                "Id": 22,
+                "Materia": "Biologia 4D",
+                "Docente": "Amor Gerez",
+                "IdAnio": 1,
+                "IdCurso": 4,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/4Anio/Biologia/PLANIFICACIONbiologia4toHéroes2024.pdf",
+                "Programa": "./documentos/2024/4Anio/Biologia/programabiologia4toHéroes2024.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Biologia.png"
+            },
+            {
+                "Id": 23,
+                "Materia": "Quimica",
+                "Docente": "Torrez Guillermo",
+                "IdAnio": 1,
+                "IdCurso": 5,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/5Anio/Quimica/PLANIFICACIONQUIMICA24.pdf",
+                "Programa": "",
+                "Documentacion": "",
+                "imagen": "./documentos/img/QuimicaII.png"
+            },
+            {
+                "Id": 24,
+                "Materia": "CS Sociales",
+                "Docente": "Veronica Natalia de la Iglesia",
+                "IdAnio": 1,
+                "IdCurso": 2,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/2Anio/CSSociales/PlanificaciondeH.D.pdf",
+                "Programa": "./documentos/2024/2Anio/CSSociales/ProgramaH.D.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/CSSociales.png"
+            },
+            {
+                "Id": 25,
+                "Materia": "Geografía",
+                "Docente": "Veronica Natalia de la Iglesia",
+                "IdAnio": 1,
+                "IdCurso": 3,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/3Anio/Geografia/PlanificacionGeografia3H.pdf",
+                "Programa": "./documentos/2024/3Anio/Geografia/ProgramaGeografia3H.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Geografia.png"
+            },
+            {
+                "Id": 26,
+                "Materia": "Historia Argentina y Latinoamericana",
+                "Docente": "Veronica Natalia de la Iglesia",
+                "IdAnio": 1,
+                "IdCurso": 4,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/4Anio/Historia/PlanificacionHistoria4H.pdf",
+                "Programa": "./documentos/2024/4Anio/Historia/ProgramaHistoria4H.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Historia.png"
+            },
+            {
+                "Id": 27,
+                "Materia": "Historia Contemporánea",
+                "Docente": "Veronica Natalia de la Iglesia",
+                "IdAnio": 1,
+                "IdCurso": 5,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/5Anio/Historia/PlanificacionHistoria5H.pdf",
+                "Programa": "./documentos/2024/5Anio/Historia/ProgramaHistoria5H.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Historia.png"
+            },
+            {
+                "Id": 28,
+                "Materia": "Matemática I",
+                "Docente": "Nancy Rojas",
+                "IdAnio": 1,
+                "IdCurso": 1,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/1Anio/Matematica/PlanificacionMatematica1.pdf",
+                "Programa": "./documentos/2024/1Anio/Matematica/ProgramaMatematica1.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Matematica.png"
+            },
+            {
+                "Id": 29,
+                "Materia": "Matemática II",
+                "Docente": "Nancy Rojas",
+                "IdAnio": 1,
+                "IdCurso": 2,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/2Anio/Matematica/PlanificacionMatematica2.pdf",
+                "Programa": "./documentos/2024/2Anio/Matematica/ProgramaMatematica2.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Matematica.png"
+            },
+            {
+                "Id": 30,
+                "Materia": "Matemática III",
+                "Docente": "Nancy Rojas",
+                "IdAnio": 1,
+                "IdCurso": 3,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/3Anio/Matematica/PlanificacionMatematica3.pdf",
+                "Programa": "./documentos/2024/3Anio/Matematica/ProgramaMatematica3.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Matematica.png"
+            },
+            {
+                "Id": 31,
+                "Materia": "Matemática IV",
+                "Docente": "Nancy Rojas",
+                "IdAnio": 1,
+                "IdCurso": 4,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/4Anio/Matematica/PlanificacionMatematica4.pdf",
+                "Programa": "./documentos/2024/4Anio/Matematica/ProgramaMatematica4.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Matematica.png"
+            },
+            {
+                "Id": 32,
+                "Materia": "Matemática V",
+                "Docente": "Nancy Rojas",
+                "IdAnio": 1,
+                "IdCurso": 5,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/5Anio/Matematica/PlanificacionMatematica5.pdf",
+                "Programa": "./documentos/2024/5Anio/Matematica/ProgramaMatematica5.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Matematica.png"
+            },
+            {
+                "Id": 33,
+                "Materia": "Inglés I",
+                "Docente": "Patricia Romano",
+                "IdAnio": 1,
+                "IdCurso": 1,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/1Anio/Ingles/PlanificacionIngles1.pdf",
+                "Programa": "",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Ingles.png"
+            },
+            {
+                "Id": 34,
+                "Materia": "Inglés II",
+                "Docente": "Patricia Romano",
+                "IdAnio": 1,
+                "IdCurso": 2,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/2Anio/Ingles/PlanificacionIngles2.pdf",
+                "Programa": "",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Ingles.png"
+            },
+            {
+                "Id": 35,
+                "Materia": "Inglés III",
+                "Docente": "Patricia Romano",
+                "IdAnio": 1,
+                "IdCurso": 3,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/3Anio/Ingles/PlanificacionIngles3.pdf",
+                "Programa": "",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Ingles.png"
+            },
+            {
+                "Id": 36,
+                "Materia": "Inglés IV",
+                "Docente": "Patricia Romano",
+                "IdAnio": 1,
+                "IdCurso": 4,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/4Anio/Ingles/PlanificacionIngles4.pdf",
+                "Programa": "",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Ingles.png"
+            },
+            {
+                "Id": 37,
+                "Materia": "Inglés V",
+                "Docente": "Patricia Romano",
+                "IdAnio": 1,
+                "IdCurso": 5,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/5Anio/Ingles/PlanificacionIngles5.pdf",
+                "Programa": "",
+                "Documentacion": "",
+                "imagen": "./documentos/img/Ingles.png"
+            },
+            {
+                "Id": 38,
+                "Materia": "Formación Ética y Ciudadana",
+                "Docente": "María López",
+                "IdAnio": 1,
+                "IdCurso": 1,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/1Anio/FormacionEtica/PlanificacionFEC1.pdf",
+                "Programa": "./documentos/2024/1Anio/FormacionEtica/ProgramaFEC1.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/FormacionEtica.png"
+            },
+            {
+                "Id": 39,
+                "Materia": "Formación Ética y Ciudadana II",
+                "Docente": "María López",
+                "IdAnio": 1,
+                "IdCurso": 2,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/2Anio/FormacionEtica/PlanificacionFEC2.pdf",
+                "Programa": "./documentos/2024/2Anio/FormacionEtica/ProgramaFEC2.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/FormacionEtica.png"
+            },
+            {
+                "Id": 40,
+                "Materia": "Educación Tecnológica",
+                "Docente": "Luis Herrera",
+                "IdAnio": 1,
+                "IdCurso": 1,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/1Anio/Tecnologia/PlanificacionTecnologia1.pdf",
+                "Programa": "./documentos/2024/1Anio/Tecnologia/ProgramaTecnologia1.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/TIC.png"
+            },
+            {
+                "Id": 41,
+                "Materia": "Educación Tecnológica II",
+                "Docente": "Luis Herrera",
+                "IdAnio": 1,
+                "IdCurso": 2,
+                "DescripcionAnio": "2024",
+                "Planificacion": "./documentos/2024/2Anio/Tecnologia/PlanificacionTecnologia2.pdf",
+                "Programa": "./documentos/2024/2Anio/Tecnologia/ProgramaTecnologia2.pdf",
+                "Documentacion": "",
+                "imagen": "./documentos/img/TIC.png"
+            }
+            /* FIN - MATERIAS */
+        ];
+
+        const contenedor = document.getElementById("listaMaterias");
+        const search = document.getElementById("search");
+
+        const list = document.getElementById('list');
+        materias.forEach(m => {
+            const div = document.createElement('div');
+            div.className = 'item';
+            div.innerHTML = `<div class="row"><img class="img-thumb" src="${m.imagen.replace('./', '')}" alt=""><h3 style="margin:0">${m.Materia}</h3></div>
+              <div class="meta">Docente: ${m.Docente} — Curso: ${m.IdCurso} / ${m.DescripcionAnio}</div>
+              <div class="actions">
+                ${m.Planificacion ? `<a href="${m.Planificacion.replace('./', '')}" download>Planificación</a>` : '<span style="color:#999">—</span>'}
+                ${m.Programa ? `<a href="${m.Programa.replace('./', '')}" download>Programa</a>` : '<span style="color:#999">—</span>'}
+                ${m.Documentacion ? `<a href="${m.Documentacion.replace('./', '')}" download>Documentación</a>` : '<span style="color:#999">—</span>'}
+              </div>`;
+            list.appendChild(div);
+        });
+
+        // Render inicial
+       
+
+    </script>
+</body>
+</html>
